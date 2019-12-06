@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: issue-2324-repro
+formValidatorService:
+  host: http://localhost:8081
