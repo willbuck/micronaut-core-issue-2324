@@ -1,7 +1,6 @@
-Steps to reproduce issue-2324 of micronaut-core:
+Steps to correct the desired behavior raised by issue-2324 of micronaut-core:
 
-1. Run both the `issue-2324-repro` and `validate-helper` apps contained here in debug mode with `./gradlew run`
-2. Set a breakpoint on line 24 of the `FormSubmissionController`
+1. Run the `issue-2324-repro` app contained here with `./gradlew run`
 3. Issue a POST request to `localhost:8080/forms/validate` with a json body including "name" and "age" (see curl example below)
 
     ```
@@ -16,4 +15,4 @@ Steps to reproduce issue-2324 of micronaut-core:
     }'
     ```
 
-4. Observe the `exception` and `exception.response.body()`. While the message ("Sorry, you did this wrong") returned from the `validate-helper` app the controller calls out to is mapped to the `exception.response.convertedBodies` array, it is not mapped to the body.
+4. Observe a success, utilizing `exception.response.getBody(JsonError::class.java)

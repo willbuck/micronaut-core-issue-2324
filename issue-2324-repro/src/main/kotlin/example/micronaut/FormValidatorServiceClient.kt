@@ -6,7 +6,7 @@ import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.annotation.Client
 import io.reactivex.Single
 
-@Client("\${formValidatorService.host}")
+@Client("/")
 interface FormValidatorServiceClient {
 
     @Post("/validate-helper")

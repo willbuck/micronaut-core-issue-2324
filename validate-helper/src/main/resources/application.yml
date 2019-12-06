@@ -1,5 +1,0 @@
-micronaut:
-  application:
-    name: validate-helper
-  server:
-    port: 8081

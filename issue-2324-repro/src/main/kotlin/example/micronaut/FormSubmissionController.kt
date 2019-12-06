@@ -1,10 +1,12 @@
 package example.micronaut
 
+import com.sun.xml.internal.ws.wsdl.writer.document.soap.BodyType
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Error
+import io.micronaut.http.annotation.Post
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.http.hateoas.JsonError
 import io.reactivex.Single
@@ -20,10 +22,9 @@ open class FormSubmissionController(private val formValidatorServiceClient: Form
 
     @Error
     fun formSubmissionException(request: HttpRequest<*>, exception: HttpClientResponseException): Single<HttpResponse<JsonError>> {
-        println(exception.response.body())
         return Single.just(
                 HttpResponse.status<JsonError>(HttpStatus.BAD_REQUEST, "Form Validation Failure")
-                        .body(JsonError(exception.response.body().toString()))
+                        .body(exception.response.getBody(JsonError::class.java).orElse(null))
         )
     }
 }
